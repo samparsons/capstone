@@ -22,7 +22,7 @@ import com.simplilearn.workshop.exception.GroceryNotFoundException;
 import com.simplilearn.workshop.model.Menu;
 import com.simplilearn.workshop.repository.GroceryRepository;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="http://18.205.244.85:80")
 @RestController
 public class GroceryResource {
 	@Autowired

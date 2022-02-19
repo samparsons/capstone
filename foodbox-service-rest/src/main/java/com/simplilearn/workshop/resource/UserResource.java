@@ -23,7 +23,7 @@ import com.simplilearn.workshop.exception.UserNotFoundException;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.UserRepository;
 
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="http://18.205.244.85:80")
 @RestController
 public class UserResource {
 	@Autowired
