@@ -1,0 +1,50 @@
+<mat-toolbar class="bg-success" id="shop">
+    <span fxFlex fxLayoutAlign="start">Choose Groceries</span>
+    <input type="text" class="searchTerm" placeholder="Search..." aria-label="Search" [(ngModel)]="search">
+  </mat-toolbar>
+  <div class="content">
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let grocery of groceryList | filter:search">
+        <mat-card class="mat-elevation-z4 bg-white" >
+          <mat-card-header class="bg-white text-dark">
+            <mat-card-title>{{grocery.name}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image class="card-img-top" src="{{grocery.imgurl}}">
+          <mat-card-content class="text-dark">
+            <p>
+              {{grocery.description}}
+            </p>
+            <p>
+              Only ${{grocery.price}} each!
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="text-dark text-center">
+            <div class="btn-group mb-3">
+              <button type="button" class="btn btn-outline-secondary" (click) = "inc(grocery)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+          </svg>
+                <span class="visually-hidden">Button</span>
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                <span>{{grocery.qty}}</span>
+              </button>
+              <button type="button" class="btn btn-outline-secondary" (click) = "dec(grocery)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                </svg>
+                <span class="visually-hidden">Button</span>
+              </button>
+              
+              
+              
+            </div>
+            <div class="text-center">
+              <p class="text-muted">${{grocery.subtotal}}</p>
+              <button class="btn btn-success" (click)="addCart(grocery)">Add to Cart</button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>

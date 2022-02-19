@@ -1,0 +1,60 @@
+ <table data-toggle="table" class="table table-striped table-hover" *ngIf="show; else shop">
+      <thead>
+          <th scope="col">Product Image</th>
+          <th scope="col">Item Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price</th>
+          <th scope="col" class="text-center">Quantity</th>
+          <th scope="col">Subtotal</th>
+          <th scope="col"></th>
+      </thead>
+      <tbody>
+          <tr class="align-middle" *ngFor="let grocery of cart">
+              <td class="col-md-2">
+                  <img class="card-img-top" src="{{grocery.imgurl}}"></td>
+              <td class="col-md-2">{{grocery.name}}</td>
+              <td class="col-md-3">{{grocery.description}}</td>
+              <td class="col-md-1">${{grocery.price}}</td>
+              <td class="col-md-2 text-center">
+                  <div class="btn-group mb-3">
+                      <button type="button" class="btn btn-outline-secondary" (click) = "inc(grocery)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+                  </svg>
+                        <span class="visually-hidden">Button</span>
+                      </button>
+                      <button type="button" class="btn btn-outline-secondary">
+                        <span>{{grocery.qty}}</span>
+                      </button>
+                      <button type="button" class="btn btn-outline-secondary" (click) = "dec(grocery)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                          <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+                        </svg>
+                        <span class="visually-hidden">Button</span>
+                      </button>
+                    </div>
+              </td>
+              <td class="col-md-1">${{grocery.subtotal}}</td>
+              <td class="col-md-1"><a class="btn btn-danger" (click)="singleDelete(grocery.id)">remove</a></td>
+          </tr>
+      </tbody>
+  </table>
+  <div class="d-flex justify-content-end" *ngIf="show">
+      <p>Total Price: ${{total.toFixed(2)}}</p>
+  </div>
+  <div class="d-flex justify-content-end" *ngIf="show">
+    <div class="col-md-2 btn-group-vertical">
+      <a class="btn btn-success" routerLink="/checkout">Checkout</a>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end pt-1" *ngIf="show">
+    <div class="col-md-2 btn-group-vertical">
+      <a class="btn btn-danger" (click)="removeall()">Clear Cart</a>
+    </div>
+  </div>
+
+<ng-template #shop>
+  <h4>Your cart is empty! Do you want to <a routerLink="/shop">shop more</a>?</h4>
+</ng-template>
+
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>

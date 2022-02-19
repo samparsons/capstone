@@ -1,0 +1,103 @@
+<div class="container-fluid overflow-hidden">
+    <div class="row vh-100 overflow-auto">
+        <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
+            <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-dark">
+                <a href="/" class="d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                    <span class="fs-5">Menu</span>
+                </a>
+                <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <button class="nav-link px-sm-0 px-2" (click)="toggle('hideall')">
+                            <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline" >Dashboard</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-link px-sm-0 px-2" (click)="toggle('g')">
+                            <i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">Products</span></button>
+                    </li>
+                    <li>
+                        <button class="nav-link px-sm-0 px-2" (click)="toggle('u')">
+                            <i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">Users</span> </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col d-flex flex-column h-100">
+            <main class="row">
+                <div class="col pt-4" *ngIf="!showUsers&&!showGrocery">
+                    <h3>Hello {{user.name}}</h3>
+                    <p class="lead">Click the Products link to see and manager our current inventory. Click the users link to see our list of users.</p>
+                    <hr />
+                    <div class="d-flex flex-row">
+                        <div style="cursor: pointer;" class="col-3 text-center bg-success m-3 hover" (click)="toggle('g')">
+                            <h4 class="text-white p-3">Total Number of Products</h4>
+                            <hr style="margin:0 auto;width:75%;">
+                            <h1 class="text-white p-3">{{groceryList.length}}</h1>
+                        </div>
+                        <div style="cursor: pointer;" class="col-3 text-center bg-primary m-3" (click)="toggle('u')">
+                            <h4 class="text-white p-3">Total Number of Users</h4>
+                            <hr style="margin:0 auto;width:75%;">
+                            <h1 class="text-white p-3">{{userList.length}}</h1>
+                        </div>
+                    </div>
+                    
+                
+                </div>
+                <div class="col pt-4" *ngIf="showUsers">
+                    <h3>Users</h3>
+                    <table data-toggle="table" class="table table-hover">
+                        <thead>
+                            <th scope="col">User Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Username</th>
+                            <th scope="col" class="text-center">Password</th>
+                            <th scope="col">Admin Status</th>
+                            <th scope="col"></th>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle" *ngFor="let user of userList">
+                                <td class="col-md-2">{{user.id}}</td>
+                                <td class="col-md-2">{{user.name}}</td>
+                                <td class="col-md-4">{{user.address}}</td>
+                                <td class="col-md-1">{{user.username}}</td>
+                                <td class="col-md-1"><input type=password disabled style="border:none;background-color: white;" value="{{user.password}}"></td>
+                                <td class="col-md-1">{{user.adminstatus}}</td>
+                                <td class="col-md-1"><a class="btn btn-danger" (click)="singleDelete(user.id,'u')">delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                </div>
+                <div class="col pt-4" *ngIf="showGrocery">
+                    <h3>Products</h3>
+                    <table data-toggle="table" class="table table-striped table-hover">
+                        <thead>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col"></th>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle" *ngFor="let grocery of groceryList">
+                                <td class="col-md-2">
+                                    <img class="card-img-top" src="{{grocery.imgurl}}"></td>
+                                <td class="col-md-2">{{grocery.name}}</td>
+                                <td class="col-md-3">{{grocery.description}}</td>
+                                <td class="col-md-1">${{grocery.price}}</td>
+                                <td></td>
+                                <td></td>
+                                <td class="col-md-1"><a class="btn btn-danger" (click)="singleDelete(grocery.id,'g')">delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                </div>
+
+            </main>
+        </div>
+    </div>
+</div>

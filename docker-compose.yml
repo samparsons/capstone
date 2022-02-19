@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  db: 
+    image: mysql:8
+    environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    - MYSQL_DATABASE=foodboxdb
+    restart: always
+    ports: 
+    - 3306:3306
+    volumes:
+    - foodboxdb:/var/lib/mysql
+    
+  foodbox-service-rest:
+    restart: on-failure
+    image: foodbox-service-rest
+    build:
+      context: ./foodbox-service-rest/
+      dockerfile: Dockerfile
+    depends_on:
+    - db
+    ports:
+    - 8081:8081
+    environment:  
+      - DATABASE_HOST=db
+      - DATABASE_NAME=foodboxdb
+      - DATABASE_PORT=3306
+
+  foodbox-app:
+    build:
+      context: ./foodbox-app/
+      dockerfile: Dockerfile
+    restart: on-failure
+    image: foodbox-app
+    ports:
+      - 80:80
+    depends_on:
+      - foodbox-service-rest
+    
+volumes:
+  foodboxdb:

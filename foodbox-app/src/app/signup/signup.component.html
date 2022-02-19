@@ -1,0 +1,196 @@
+<div class="px-4 py-5 my-5 text-center">
+    <img class="d-block mx-auto mb-4" src="assets/img/grocery-bag-48.png" alt="" width="72" height="57">
+    <h1 class="display-5 fw-bold">We Can't Wait To Serve You!</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Sign-up today!</p>
+        <!--FORM BEGIN-->
+        <div class="px-4 py-5 my-5 text-start">
+            <h4 class="mb-3">Billing address</h4>
+            <form class="needs-validation" [formGroup]="signup"  (ngSubmit)="onSubmit(signup)">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label  for="username">Email address</label>
+                        <input  type="email" 
+                                class="form-control" 
+                                id="username" 
+                                formControlName="username" 
+                                placeholder="name@example.com"
+                                required
+                                [ngClass]="{ 'is-invalid': submitted && f['username'].errors }">
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                            <div *ngIf="f['username'].errors['required']">Email Address is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                        <small *ngIf="!(submitted && f['username'].errors)" class="text-muted">Your email is your username</small>
+                        
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="floatingPassword">Password</label>
+                        <input  type="password" 
+                                class="form-control" 
+                                id="password"
+                                formControlName="password" 
+                                placeholder="Password"
+                                required
+                                [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                            <div *ngIf="f['password'].errors['required']">Email Address is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                        
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label for="adminstatus">Admin Status</label>
+                        <select class="form-select d-block w-100"
+                                formControlName="adminstatus" 
+                                id="adminstatus" 
+                                required
+                                [ngClass]="{ 'is-invalid': submitted && f['adminstatus'].errors }">
+                            <option value="">Choose...</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                        </select>
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['adminstatus'].errors" class="invalid-feedback">
+                            <div *ngIf="f['adminstatus'].errors['required']">Country is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                </div>
+                <div class="row">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    <label for="firstName">First name</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="firstName" 
+                        formControlName="firstName" 
+                        placeholder="Paul"
+                        required
+                        [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                        
+                        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                            <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+                        </div>
+                    
+                    
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    <label for="lastName">Last name</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="lastName" 
+                        formControlName="lastName" 
+                        placeholder="Atreides"
+                        required
+                        [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+                        
+                        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address">Address</label>
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="address" 
+                        formControlName="address" 
+                        placeholder="1234 Main St"
+                        required
+                        [ngClass]="{ 'is-invalid': submitted && f['address'].errors }">
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                        <div *ngIf="f['address'].errors['required']">Address is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                    
+                </div>
+
+                <div class="mb-3">
+                    <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                </div>
+
+                <div class="row">
+                    <div class="mb-3">
+                        <label for="address">City</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="city" 
+                            formControlName="city" 
+                            placeholder="City"
+                            required
+                            [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                            <div *ngIf="f['city'].errors['required']">City is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                    </div>
+                      
+                    <div class="col-md-4 mb-3">
+                        <label for="state">State</label>
+                        <select class="form-select d-block w-100"
+                                formControlName="state"
+                                id="state" 
+                                required
+                                [ngClass]="{ 'is-invalid': submitted && f['state'].errors }">
+                          <option value="">Choose...</option>
+                          <option>Indiana</option>
+                          <option>Washington D.C.</option>
+                        </select>
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                          <div *ngIf="f['state'].errors['required']">State is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                        
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label  for="zip">Zip</label>
+                        <input  type="text" 
+                                class="form-control" 
+                                formControlName="zip" 
+                                id="zip" 
+                                placeholder=""
+                                required
+                                [ngClass]="{ 'is-invalid': submitted && f['zip'].errors }">
+                          <!-- ERROR MSG -->
+                          <div *ngIf="submitted && f['zip'].errors" class="invalid-feedback">
+                            <div *ngIf="f['zip'].errors['required']">Zipcode is required</div>
+                          </div>
+                          <!-- /ERROR MSG -->
+                          
+                    </div>
+                    <div class="col-md-5 mb-3">
+                        <label for="country">Country</label>
+                        <select class="form-select d-block w-100"
+                                formControlName="country" 
+                                id="country" 
+                                required
+                                [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                          <option value="">Choose...</option>
+                          <option>United States</option>
+                        </select>
+                        <!-- ERROR MSG -->
+                        <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                          <div *ngIf="f['country'].errors['required']">Country is required</div>
+                        </div>
+                        <!-- /ERROR MSG -->
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+                <hr class="my-4">
+                <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+            </form>
+        </div>
+    </div>
+</div>

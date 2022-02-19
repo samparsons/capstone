@@ -1,0 +1,13 @@
+<div class="container">
+    <h3>Login to Kitchen Story</h3>
+    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+    <div class="pt-3">
+        User Name   : <input type="text" name="username" [(ngModel)] = "username"> 
+        Password    : <input type="password" name="password" [(ngModel)] = "password">
+        <br>
+        <div class="pt-4">
+            <button (click) = handleLogin() class="btn btn-success" type="submit">Submit</button>
+            <p class="pt-2"> Not Registered? <a routerLink="/signup">Sign Up</a></p>
+        </div>
+    </div>
+</div>

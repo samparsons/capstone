@@ -1,0 +1,288 @@
+<!--EXAMPLE FOUND HERE: https://getbootstrap.com/docs/4.0/examples/checkout/ -->
+
+<div class="container">
+    <div class="py-1 text-center">
+      <h2>Checkout</h2>
+    </div>
+    <!--CART BEGIN-->
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Your cart</span>
+          <span class="badge rounded-pill bg-success">{{cartCount}} items</span>
+        </h4>
+       
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let grocery of cart">
+            <div>
+              <h6 class="my-0">{{grocery.name}}</h6>
+              <small class="text-muted">{{grocery.description}}</small>
+            </div>
+            <span class="text-muted">${{grocery.subtotal}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Tax</span>
+            <span>${{(total*.07).toFixed(2)}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>${{(total+(total*.07)).toFixed(2)}}</strong>
+          </li>
+        </ul>
+        <a routerLink="/cart" class="small pb-1">edit cart</a>
+      </div>
+      <!--CART END-->
+      <!--FORM BEGIN-->
+      
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Billing address</h4>
+        <form class="needs-validation" [formGroup]="checkout"  (ngSubmit)="onSubmit(checkout)">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">First name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="firstName" 
+                formControlName="firstName" 
+                placeholder="Paul"
+                required
+                [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
+                
+                <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                  <div *ngIf="f['firstName'].errors['required']">First Name is required</div>
+                </div>
+             
+             
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Last name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="lastName" 
+                formControlName="lastName" 
+                placeholder="Atreides"
+                required
+                [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
+                
+                <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                  <div *ngIf="f['lastName'].errors['required']">Last Name is required</div>
+                </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="address">Address</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="address" 
+                formControlName="address" 
+                placeholder="1234 Main St"
+                required
+                [ngClass]="{ 'is-invalid': submitted && f['address'].errors }">
+                <!-- ERROR MSG -->
+                <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                  <div *ngIf="f['address'].errors['required']">Address is required</div>
+                </div>
+                <!-- /ERROR MSG -->
+            
+          </div>
+
+          <div class="mb-3">
+            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+          </div>
+
+          <div class="row">
+            <div class="mb-3">
+              <label for="address">City</label>
+              <input 
+                  type="text" 
+                  class="form-control" 
+                  id="city" 
+                  formControlName="city" 
+                  placeholder="City"
+                  required
+                  [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
+                  <!-- ERROR MSG -->
+                  <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                    <div *ngIf="f['city'].errors['required']">City is required</div>
+                  </div>
+                  <!-- /ERROR MSG -->
+              
+            </div>
+            
+            <div class="col-md-4 mb-3">
+              <label for="state">State</label>
+              <select class="form-select d-block w-100"
+                      formControlName="state"
+                      id="state" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['state'].errors }">
+                <option value="">Choose...</option>
+                <option>Indiana</option>
+                <option>Washington D.C.</option>
+              </select>
+              <!-- ERROR MSG -->
+              <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                <div *ngIf="f['state'].errors['required']">State is required</div>
+              </div>
+              <!-- /ERROR MSG -->
+              
+            </div>
+            <div class="col-md-3 mb-3">
+              <label  for="zip">Zip</label>
+              <input  type="text" 
+                      class="form-control" 
+                      formControlName="zip" 
+                      id="zip" 
+                      placeholder=""
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['zip'].errors }">
+                <!-- ERROR MSG -->
+                <div *ngIf="submitted && f['zip'].errors" class="invalid-feedback">
+                  <div *ngIf="f['zip'].errors['required']">Zipcode is required</div>
+                </div>
+                <!-- /ERROR MSG -->
+                
+            </div>
+            <div class="col-md-5 mb-3">
+              <label for="country">Country</label>
+              <select class="form-select d-block w-100"
+                      formControlName="country" 
+                      id="country" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['country'].errors }">
+                <option value="">Choose...</option>
+                <option>United States</option>
+              </select>
+              <!-- ERROR MSG -->
+              <div *ngIf="submitted && f['country'].errors" class="invalid-feedback">
+                <div *ngIf="f['country'].errors['required']">Country is required</div>
+              </div>
+              <!-- /ERROR MSG -->
+            </div>
+          </div>
+          <hr class="mb-4">
+          <div class="d-block my-3">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="saveInfo">
+              <label class="form-check-label ps-1" for="saveInfo">Save this information for next time</label>
+            </div>
+          </div>
+          <hr class="mb-4">
+          
+
+          <h4 class="mb-3">Payment</h4>
+          
+
+          <div class="d-block my-3">
+            
+            <div class="form-check">
+              <input  id="credit"
+                      value="credit"
+                      name="paymentMethod"
+                      formControlName="paymentMethod"
+                      type="radio" 
+                      class="form-check-input" 
+                      checked 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['paymentMethod'].errors }">
+              <label class="form-check-label ps-1" for="credit">Credit card</label>
+            </div>
+            <div class="form-check">
+              <input  id="debit" 
+                      value="debit"
+                      name="paymentMethod"
+                      formControlName="paymentMethod"
+                      type="radio" 
+                      class="form-check-input" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['paymentMethod'].errors }">
+
+              <label class="form-check-label ps-1" for="debit">Debit card</label>
+               <!-- ERROR MSG -->
+              <div *ngIf="submitted && f['paymentMethod'].errors" class="invalid-feedback">
+                <div *ngIf="f['paymentMethod'].errors['required']">Payment method is required</div>
+              </div>
+              <!-- /ERROR MSG -->
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="ccName">Name on card</label>
+              <input  type="text" 
+                      class="form-control"
+                      formControlName="ccName"
+                      id="ccName"
+                      placeholder="" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['ccName'].errors }">
+                <!-- ERROR MSG -->
+                <div *ngIf="submitted && f['ccName'].errors" class="invalid-feedback">
+                  <div *ngIf="f['ccName'].errors['required']">Name is required</div>
+                </div>
+                <!-- /ERROR MSG -->
+              <small *ngIf="!(submitted && f['ccName'].errors)" class="text-muted">Full name as displayed on card</small>
+              
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="ccNumber">Credit card number</label>
+              <input  type="text" 
+                      class="form-control" 
+                      formControlName="ccNumber"
+                      id="ccNumber" 
+                      placeholder="" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['ccName'].errors }">
+              <!-- ERROR MSG -->
+              <div *ngIf="submitted && f['ccName'].errors" class="invalid-feedback">
+                <div *ngIf="f['ccName'].errors['required']">Name is required</div>
+              </div>
+              <!-- /ERROR MSG -->
+              
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 mb-3">
+              <label for="ccExpiration">Expiration</label>
+              <input  type="text" 
+                      class="form-control" 
+                      formControlName="ccExpiration"
+                      id="ccExpiration" 
+                      placeholder="" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['ccExpiration'].errors }">
+              <!-- ERROR MSG -->
+              <div *ngIf="submitted && f['ccExpiration'].errors" class="invalid-feedback">
+                <div *ngIf="f['ccExpiration'].errors['required']">Name is required</div>
+              </div>
+              <!-- /ERROR MSG -->
+              
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="ccCvv">CVV</label>
+              <input  type="text" 
+                      class="form-control" 
+                      formControlName="ccCvv"
+                      id="ccCvv" 
+                      placeholder="" 
+                      required
+                      [ngClass]="{ 'is-invalid': submitted && f['ccCvv'].errors }">
+              <!-- ERROR MSG -->
+              <div *ngIf="submitted && f['ccCvv'].errors" class="invalid-feedback">
+                <div *ngIf="f['ccCvv'].errors['required']">Name is required</div>
+              </div>
+              <!-- /ERROR MSG -->
+              
+            </div>
+          </div>
+          <hr class="mb-4">
+          <button type="submit" class="btn btn-primary btn-lg btn-block" >Checkout Now</button>
+        </form>
+      </div>
+    </div>
+  </div>
