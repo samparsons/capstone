@@ -2,7 +2,7 @@
 
 # Use official node image as the base image
 FROM node:latest as build
-RUN 'mkdir /app' 
+RUN mkdir /app 
 # Set the working directory
 WORKDIR /app
 

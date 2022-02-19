@@ -41,8 +41,8 @@
 # verify jenkins install
  > sudo service jenkins status
 
-#if status is active get password...
- > go to website with port : 8080 -> example: http://54.147.239.252:8080/
+# if status is active get password...
+# go to website with port : 8080 -> example: http://54.147.239.252:8080/
 # get password for jenkins
  > sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 # set up jenkins. create pipeline and push code to jenkins
