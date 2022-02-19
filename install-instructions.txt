@@ -1,12 +1,12 @@
 #########################
-# BACKEND SERVER SET UP 
+# SERVER SET UP 
 #########################
 # set up ec2 instance, use t2.medium
-# expose port 8080, 8081, HTTP
+# expose port 8080, 8081, 4200, HTTP
 
 # install jenkins
  > sudo apt-get update
- > sudo apt install default-jdk -y 
+ > sudo apt install default-jdk -y
  > sudo apt install maven -y
  > curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
  > echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
@@ -22,24 +22,24 @@
  > sudo apt-get update
  > sudo apt-get install docker-ce docker-ce-cli containerd.io -y
 
-# verify docker install 
- > sudo docker -v
-
-# verify jenkins install
- > sudo service jenkins status
-
-# give jenkins user permissions and restart the jenkins server. 
- > sudo usermod -a -G docker jenkins
- > sudo service jenkins restart
-
 # install docker-compose 
 > sudo apt-get update
 > sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 > sudo chmod +x /usr/local/bin/docker-compose
 > sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+# verify docker install 
+ > sudo docker -v
+
 # verify docker-compose 
 > docker-compose --version
+
+# give jenkins user permissions and restart the jenkins server. 
+ > sudo usermod -a -G docker jenkins
+ > sudo service jenkins restart
+
+# verify jenkins install
+ > sudo service jenkins status
 
 #if status is active get password...
  > go to website with port : 8080 -> example: http://54.147.239.252:8080/
@@ -47,6 +47,15 @@
  > sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 # set up jenkins. create pipeline and push code to jenkins
 # for backend pipeline, use git repo: https://github.com/samparsons/pg6-backend.git
+
+
+
+
+
+
+
+
+
 
 #########################
 # FRONTEND SERVER SET UP 

@@ -1,9 +1,7 @@
 # Stage 1: Compile and Build angular codebase
 
 # Use official node image as the base image
-RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 FROM node:latest as build
-
 RUN 'mkdir /app' 
 # Set the working directory
 WORKDIR /app
