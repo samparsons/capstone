@@ -10,7 +10,7 @@ WORKDIR /app
 COPY ./ /usr/local/app/
 
 # Install all the dependencies
-RUN npm install
+RUN sudo npm install
 
 # Generate the build of the application
 RUN npm run build
