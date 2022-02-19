@@ -2,6 +2,7 @@ version: '3.8'
 services:
   db: 
     image: mysql:8
+    container_name: fdbxdb
     environment:
     - MYSQL_ALLOW_EMPTY_PASSWORD=true
     - MYSQL_DATABASE=foodboxdb
@@ -12,6 +13,7 @@ services:
     - foodboxdb:/var/lib/mysql
     
   foodbox-service-rest:
+    container_name: fdbxsvcrst
     restart: on-failure
     image: foodbox-service-rest
     build:
@@ -27,6 +29,7 @@ services:
       - DATABASE_PORT=3306
 
   foodbox-app:
+    container_name: fdbx
     build:
       context: ./foodbox-app/
       dockerfile: Dockerfile

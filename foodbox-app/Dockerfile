@@ -9,9 +9,11 @@ WORKDIR /app
 # Add the source code to app
 COPY ./ /usr/local/app/
 
-# Install all the dependencies
-RUN sudo npm install
+WORKDIR /usr/local/app/
 
+# Install all the dependencies
+RUN npm install
+RUN npm i ng2-search-filter
 # Generate the build of the application
 RUN npm run build
 
