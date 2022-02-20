@@ -40,7 +40,7 @@ export class SignupComponent implements OnInit {
       state: ['', Validators.required],
       zip: ['', Validators.required],
       country: ['', Validators.required],
-      adminstatus: ['', Validators.required],
+      //adminstatus: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required]
     })

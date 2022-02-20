@@ -55,6 +55,10 @@ public class UserResource {
 	@PostMapping(path = "/user")
 	public ResponseEntity<User> createProduct(@RequestBody User theUser) {
 		User savedUser = userRepository.save(theUser);
+		savedUser.setAdminstatus(theUser.getAdminstatus());
+		if(savedUser.getAdminstatus()==null) {
+			savedUser.setAdminstatus(false);
+		}
 		URI location = ServletUriComponentsBuilder
 				 .fromCurrentRequest()
 				 .path("/{theId}")
@@ -74,6 +78,9 @@ public class UserResource {
 			savedUser.setName(theUser.getName());
 			savedUser.setAddress(theUser.getAddress());
 			savedUser.setAdminstatus(theUser.getAdminstatus());
+			if(savedUser.getAdminstatus()==null) {
+				savedUser.setAdminstatus(false);
+			}
 			userRepository.save(savedUser);
 		} catch (UserNotFoundException e) {
 			throw new UserNotFoundException("id -" + theId);
