@@ -9,7 +9,7 @@ insert into menu(id,name,description,category,imgurl,price) values (7,'Biryani',
 insert into menu(id,name,description,category,imgurl,price) values (8,'Dosa','A description of Dosa.','indian','assets/img/indian/indian_dosa.jpeg',12.49);
 insert into menu(id,name,description,category,imgurl,price) values (9,'Indian Entree 1','A description of Entree 1.','indian','assets/img/indian/indian_entree1.jpeg',12.99);
 insert into menu(id,name,description,category,imgurl,price) values (10,'Indian Entree 2','A description of Entree 2.','indian','assets/img/indian/indian_entree2.jpeg',11.79);
-insert into menu(id,name,description,category,imgurl,price) values (11,'Indian Entree 3','A description of Entree 3.','indian','assets/img/indian/indian_entreed3.jpeg',12.89);
+insert into menu(id,name,description,category,imgurl,price) values (11,'Indian Entree 3','A description of Entree 3.','indian','assets/img/indian/indian_entree3.jpeg',12.89);
 insert into menu(id,name,description,category,imgurl,price) values (12,'Indian Entree 4','A description of Entree 4.','indian','assets/img/indian/indian_entree4.jpeg',17.69);
 insert into menu(id,name,description,category,imgurl,price) values (13,'Thali','A description of Thali.','indian','assets/img/indian/indian_thali.jpeg',14.69);
 
