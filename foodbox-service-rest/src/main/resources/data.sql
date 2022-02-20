@@ -11,11 +11,11 @@ insert into menu(id,name,description,category,imgurl,price) values (9,'Indian En
 insert into menu(id,name,description,category,imgurl,price) values (10,'Indian Entree 2','A description of Entree 2.','indian','assets/img/indian/indian_entree2.jpeg',11.79);
 insert into menu(id,name,description,category,imgurl,price) values (11,'Indian Entree 3','A description of Entree 3.','indian','assets/img/indian/indian_entree3.jpeg',12.89);
 insert into menu(id,name,description,category,imgurl,price) values (12,'Indian Entree 4','A description of Entree 4.','indian','assets/img/indian/indian_entree4.jpeg',17.69);
-insert into menu(id,name,description,category,imgurl,price) values (13,'Thali','A description of Thali.','indian','assets/img/indian/indian_thali.jpeg',14.69);
+insert into menu(id,name,description,category,imgurl,price) values (13,'Thali','A description of Thali.','indian','assets/img/indian/indian_thali.png',14.69);
 
 insert into menu(id,name,description,category,imgurl,price) values (14,'Chimichanga','A description of Chimichanga.','mexican','assets/img/mexican/mexican_chimichanga.jpeg',14.49);
-insert into menu(id,name,description,category,imgurl,price) values (15,'Fajitas','A description of Fajitas.','mexican','assets/img/mexican/mexican_fajitas.jpeg.jpeg',12.49);
-insert into menu(id,name,description,category,imgurl,price) values (16,'Quesadilla Entree','A description of Quesadilla Entree.','mexican','assets/img/mexican/mexican_quesadilla.jpeg.jpeg',12.99);
+insert into menu(id,name,description,category,imgurl,price) values (15,'Fajitas','A description of Fajitas.','mexican','assets/img/mexican/mexican_fajitas.jpeg',12.49);
+insert into menu(id,name,description,category,imgurl,price) values (16,'Quesadilla Entree','A description of Quesadilla Entree.','mexican','assets/img/mexican/mexican_quesadilla.jpeg',12.99);
 insert into menu(id,name,description,category,imgurl,price) values (17,'Tacos','A description of Tacos.','mexican','assets/img/mexican/mexican_tacos.jpeg',11.79);
 insert into menu(id,name,description,category,imgurl,price) values (18,'Tamale','A description of Tamale.','mexican','assets/img/mexican/mexican_tamale.jpeg',12.89);
 
