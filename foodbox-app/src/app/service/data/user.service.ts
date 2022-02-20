@@ -21,7 +21,7 @@ export class User {
 })
 
 export class UserService {
-  baseurl = 'http://18.205.244.85:8081/user';
+  baseurl = 'http://3.86.200.81:8081/user';
   constructor(private http:HttpClient) { }
 
   getUserAuth(username:string,password:string): Observable<User> {

@@ -48,6 +48,8 @@
 # set up jenkins. create pipeline and push code to jenkins
 # for backend pipeline, use git repo: https://github.com/samparsons/pg6-backend.git
 
+# UPDATE AngularJS with correct IP address from ec2 box.
+
 # create pipeline
 # Go to Build Triggers > Poll SCM, enter '* * * * *'
 # Go to Pipeline, choose 'Pipeline script from SCM'
@@ -62,13 +64,13 @@
 
  NOTES:
 # run the command to run ubuntu on the docker image so you can start doing commands to check and see how things are working. 
-> docker run -it ubuntu bash 
+> docker run -it <image name> bash 
 
 #run an image name 
 > docker run <image name> 
 
-
-
 # show the ip address of the container 
 > docker exec <image name> cat /etc/hosts 
 
+# get logs from a docker container 
+> docker logs [OPTIONS] CONTAINER
