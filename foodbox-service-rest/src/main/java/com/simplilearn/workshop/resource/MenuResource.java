@@ -18,65 +18,70 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.simplilearn.workshop.exception.GroceryNotFoundException;
+import com.simplilearn.workshop.exception.MenuNotFoundException;
 import com.simplilearn.workshop.model.Menu;
-import com.simplilearn.workshop.repository.GroceryRepository;
+import com.simplilearn.workshop.repository.MenuRepository;
 
 @CrossOrigin(allowedHeaders="*",originPatterns="*")
 @RestController
-public class GroceryResource {
+public class MenuResource {
 	@Autowired
-	private GroceryRepository groceryRepository;
+	private MenuRepository menuRepository;
 	
-	@GetMapping(path="/grocery")
-	public List<Menu> getGroceries() {
-		return groceryRepository.findAll();
+	@GetMapping(path="/")
+	public String welcome() {
+		return "please choose an API route to call";
 	}
 	
-	@GetMapping(path="/grocery/{theId}")
-	public Menu getGroceryById(Integer theId) {
-		Menu grocery = groceryRepository.findById(theId).get(); 
-		return grocery;
+	@GetMapping(path="/menu")
+	public List<Menu> getGroceries() {
+		return menuRepository.findAll();
+	}
+	
+	@GetMapping(path="/menu/{theId}")
+	public Menu getMenuById(Integer theId) {
+		Menu menu = menuRepository.findById(theId).get(); 
+		return menu;
 	} 
 	
-	@PostMapping(path = "/grocery")
-	public ResponseEntity<Menu> createProduct(@RequestBody Menu theGrocery) {
-		Menu savedGrocery = groceryRepository.save(theGrocery);
+	@PostMapping(path = "/menu")
+	public ResponseEntity<Menu> createProduct(@RequestBody Menu theMenu) {
+		Menu savedMenu = menuRepository.save(theMenu);
 		URI location = ServletUriComponentsBuilder
 				 .fromCurrentRequest()
 				 .path("/{theId}")
-				 .buildAndExpand(savedGrocery.getId())
+				 .buildAndExpand(savedMenu.getId())
 				 .toUri();
 		return ResponseEntity.created(location).build();
 	}
 	
-	@PutMapping(path="/grocery/{theId}")
+	@PutMapping(path="/menu/{theId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateProduct(@PathVariable Integer theId, @RequestBody Menu theGrocery) {
+	public void updateProduct(@PathVariable Integer theId, @RequestBody Menu theMenu) {
 		try {
-			Menu savedGrocery = groceryRepository.findById(theId).get();
-			savedGrocery.setName(theGrocery.getName());
-			savedGrocery.setDescription(theGrocery.getDescription());
-			savedGrocery.setPrice(theGrocery.getPrice());
-			groceryRepository.save(savedGrocery);
-		} catch (GroceryNotFoundException e) {
-			throw new GroceryNotFoundException("id - " + theId);
+			Menu savedMenu = menuRepository.findById(theId).get();
+			savedMenu.setName(theMenu.getName());
+			savedMenu.setDescription(theMenu.getDescription());
+			savedMenu.setPrice(theMenu.getPrice());
+			menuRepository.save(savedMenu);
+		} catch (MenuNotFoundException e) {
+			throw new MenuNotFoundException("id - " + theId);
 		}  catch (NoSuchElementException e) {
-			throw new GroceryNotFoundException("id - " + theId);
+			throw new MenuNotFoundException("id - " + theId);
 		}
 	}
 	
-	@DeleteMapping(path="/grocery/{theId}")
+	@DeleteMapping(path="/menu/{theId}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void deleteProduct(@PathVariable Integer theId) {
 		try {
-		Menu theGrocery = groceryRepository.findById(theId).get();
-		} catch (GroceryNotFoundException e) {
-			throw new GroceryNotFoundException("id -" + theId);
+		Menu theMenu = menuRepository.findById(theId).get();
+		} catch (MenuNotFoundException e) {
+			throw new MenuNotFoundException("id -" + theId);
 		}  catch (NoSuchElementException e) {
-			throw new GroceryNotFoundException("id - " + theId);
+			throw new MenuNotFoundException("id - " + theId);
 		}
-		groceryRepository.deleteById(theId);
+		menuRepository.deleteById(theId);
 	}
 
 }

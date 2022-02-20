@@ -12,6 +12,7 @@ public class Menu {
 	private Integer Id;
 	private String name;
 	private String description;
+	private String category;
 	private String imgurl;
 	private Double price;
 	
@@ -19,14 +20,23 @@ public class Menu {
 		super();
 	}
 	
-	public Menu(String name, String description, String imgurl, Double price) {
+	public Menu(String name, String description, String category,String imgurl, Double price) {
 		super();
 		this.name = name;
 		this.description = description;
+		this.category = category;
 		this.imgurl = imgurl;
 		this.price = price;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getImgurl() {
 		return imgurl;
 	}
@@ -69,8 +79,11 @@ public class Menu {
 
 	@Override
 	public String toString() {
-		return "Grocery [Id=" + Id + ", name=" + name + ", description=" + description + ", price=" + price + "]";
+		return "Menu [Id=" + Id + ", name=" + name + ", description=" + description + ", category=" + category
+				+ ", imgurl=" + imgurl + ", price=" + price + "]";
 	}
+
+	
 	
 	
 

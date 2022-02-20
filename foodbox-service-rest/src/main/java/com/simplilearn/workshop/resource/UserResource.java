@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.simplilearn.workshop.exception.GroceryNotFoundException;
+import com.simplilearn.workshop.exception.MenuNotFoundException;
 import com.simplilearn.workshop.exception.UserNotFoundException;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.UserRepository;
