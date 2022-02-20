@@ -1,4 +1,4 @@
-insert into menu(id,name,description,category,imgurl,price) values (1,'Sweet &amp; Sour Soup','A description of Sweet &amp; Sour Soup.','chinese','assets/img/chinese/chinese_sweetsoursoup.jpeg',7.99);
+insert into menu(id,name,description,category,imgurl,price) values (1,'Sweet \x26 Sour Soup','A description of Sweet \x26 Sour Soup.','chinese','assets/img/chinese/chinese_sweetsoursoup.jpeg',7.99);
 insert into menu(id,name,description,category,imgurl,price) values (2,'Dumplings','A description of Dumplings.','chinese','assets/img/chinese/chinese_dumpling.jpeg',14.99);
 insert into menu(id,name,description,category,imgurl,price) values (3,'Eggrolls','A description of Eggrolls.','chinese','assets/img/chinese/chinese_eggroll.jpeg',12.99);
 insert into menu(id,name,description,category,imgurl,price) values (4,'Lo Mein','A description of Lo Mein.','chinese','assets/img/chinese/chinese_lomein.jpeg',10.49);
@@ -28,7 +28,7 @@ insert into user(id,name,address,username,password,adminstatus) values (6,'Milo 
 insert into user(id,name,address,username,password,adminstatus) values (7,'Annika Beczkiewicz','123 Road, Bloomington, DC, 20010','anni','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (8,'Jana Parsons','123 Road, La Crosse, DC, 20010','jana','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (9,'Logan Parsons','123 Road, La Crosse, DC, 20010','logie','pw',false);
-insert into user(id,name,address,username,password,adminstatus) values (10,'David Parsons','123 Road, Bloomington, DC, 20010','emi','pw',false);
+insert into user(id,name,address,username,password,adminstatus) values (10,'Emilee Parsons','123 Road, Bloomington, DC, 20010','emi','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (11,'Sharon Parsons','123 Road, Bloomington, DC, 20010','emi','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (12,'Aurora Alvarez','123 Calle, Buenos Aries, BS, 20010','suegra','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (13,'Diego Candia','123 Calle, Viedma, RN, 20010','suegro','pw',false);
