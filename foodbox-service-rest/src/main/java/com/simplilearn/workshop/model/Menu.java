@@ -15,20 +15,30 @@ public class Menu {
 	private String category;
 	private String imgurl;
 	private Double price;
+	private Boolean active;
 	
 	public Menu() {
 		super();
 	}
 	
-	public Menu(String name, String description, String category,String imgurl, Double price) {
+	public Menu(String name, String description, String category,String imgurl, Double price, Boolean active) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.category = category;
 		this.imgurl = imgurl;
 		this.price = price;
+		this.active = active;
 	}
 	
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
 	public String getCategory() {
 		return category;
 	}

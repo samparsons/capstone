@@ -1,8 +1,13 @@
 package com.simplilearn.workshop.resource;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +25,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.simplilearn.workshop.exception.MenuNotFoundException;
 import com.simplilearn.workshop.exception.UserNotFoundException;
+import com.simplilearn.workshop.model.Menu;
 import com.simplilearn.workshop.model.User;
 import com.simplilearn.workshop.repository.UserRepository;
 
 @CrossOrigin(allowedHeaders="*",originPatterns="*")
 @RestController
 public class UserResource {
+	
 	@Autowired
 	private UserRepository userRepository;
+	
 	
 	@GetMapping(path="/user")
 	public List<User> getGroceries() {
@@ -95,7 +103,7 @@ public class UserResource {
 		try {
 		User theUser = userRepository.findById(theId).get();
 		} catch (UserNotFoundException e) {
-			throw new UserNotFoundException("id -" + theId);
+			throw new UserNotFoundException("id -" + theId); 
 		}  catch (NoSuchElementException e) {
 			throw new UserNotFoundException("id - " + theId);
 		}
