@@ -3,6 +3,7 @@ package com.simplilearn.workshop.resource;
 import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,19 +34,139 @@ public class MenuResource {
 		return "please choose an API route to call";
 	}
 	
-	@GetMapping(path="/menu")
-	public List<Menu> getGroceries() {
-		return menuRepository.findAll();
+	@GetMapping(path={	"/menu/all",
+						"/menu/all/{orderByField}",
+						"/menu/all/{orderByField}/{sortDesc}"})
+	public List<Menu> getAllMenus(	@PathVariable(required = false) String orderByField, 
+									@PathVariable(required = false) Boolean sortDesc) {
+		if(orderByField!=null) {
+			if(orderByField.equals("name")&&sortDesc==null) {
+				return menuRepository.findAllByOrderByName();
+			}else if(orderByField.equals("name")&&!sortDesc) {
+				return menuRepository.findAllByOrderByName();
+			}else if(orderByField.equals("name")&&sortDesc) {
+				return menuRepository.findAllByOrderByNameDesc();
+			}else if(orderByField.equals("price")&&sortDesc==null) {
+				return menuRepository.findAllByOrderByPrice();
+			}else if(orderByField.equals("price")&&!sortDesc) {
+				return menuRepository.findAllByOrderByPrice();
+			}else if(orderByField.equals("price")&&sortDesc) {
+				return menuRepository.findAllByOrderByPriceDesc();
+			}else {
+				return menuRepository.findAll();
+			}
+		} else {
+			return menuRepository.findAll();
+		}
 	}
 	
-	@GetMapping(path="/menu/{theId}")
-	public Menu getMenuById(Integer theId) {
-		Menu menu = menuRepository.findById(theId).get(); 
-		return menu;
-	} 
+	@GetMapping(path={	"/menu/np/{active}",
+						"/menu/np/{active}/{orderByField}",
+						"/menu/np/{active}/{orderByField}/{sortDesc}"})
+	public List<Menu> getActiveMenus(	@PathVariable Boolean active, 
+										@PathVariable(required = false) String orderByField, 
+										@PathVariable(required = false) Boolean sortDesc) {
+		if(orderByField!=null) {
+			//active false
+			if(!active&&orderByField.equals("name")&&sortDesc==null) {
+				return menuRepository.findByActiveFalseOrderByName();
+			}else if(!active&&orderByField.equals("name")&&!sortDesc) {
+				return menuRepository.findByActiveFalseOrderByName();
+			}else if(!active&&orderByField.equals("name")&&sortDesc) {
+				return menuRepository.findByActiveFalseOrderByNameDesc();
+			}else if(!active&&orderByField.equals("price")&&sortDesc==null) {
+				return menuRepository.findByActiveFalseOrderByPrice();
+			}else if(!active&&orderByField.equals("price")&&!sortDesc) {
+				return menuRepository.findByActiveFalseOrderByPrice();
+			}else if(!active&&orderByField.equals("price")&&sortDesc) {
+				return menuRepository.findByActiveFalseOrderByPriceDesc();
+			}
+			//active true
+			else if(active&&orderByField.equals("name")&&sortDesc==null) {
+				return menuRepository.findByActiveTrueOrderByName();
+			}else if(active&&orderByField.equals("name")&&!sortDesc) {
+				return menuRepository.findByActiveTrueOrderByName();
+			}else if(active&&orderByField.equals("name")&&sortDesc) {
+				return menuRepository.findByActiveTrueOrderByNameDesc();
+			}else if(active&&orderByField.equals("price")&&sortDesc==null) {
+				return menuRepository.findByActiveTrueOrderByPrice();
+			}else if(active&&orderByField.equals("price")&&!sortDesc) {
+				return menuRepository.findByActiveTrueOrderByPrice();
+			}else if(active&&orderByField.equals("price")&&sortDesc) {
+				return menuRepository.findByActiveTrueOrderByPriceDesc();
+			}
+			//
+			else {
+				return menuRepository.findAll();
+			}
+		} else {
+			if(!active) {
+				return menuRepository.findByActiveFalse();
+			} else {
+				return menuRepository.findByActiveTrue();
+			}
+		}
+	
+	}
+	
+	@GetMapping(path={	"/menu/cat/{active}/{category}",
+						"/menu/cat/{active}/{category}/{orderByField}/",
+						"/menu/cat/{active}/{category}/{orderByField}/{sortDesc}"})
+					public List<Menu> getMenusByCategory(	@PathVariable Boolean active,
+															@PathVariable String category, 
+															@PathVariable(required = false) String orderByField, 
+															@PathVariable(required = false) Boolean sortDesc) {
+					if(orderByField!=null) {
+						//active false
+						if(!active&&orderByField.equals("name")&&sortDesc==null) {
+							return menuRepository.findByCategoryAndActiveFalseOrderByName(category);
+						}else if(!active&&orderByField.equals("name")&&!sortDesc) {
+							return menuRepository.findByCategoryAndActiveFalseOrderByName(category);
+						}else if(!active&&orderByField.equals("name")&&sortDesc) {
+							return menuRepository.findByCategoryAndActiveFalseOrderByNameDesc(category);
+						}else if(!active&&orderByField.equals("price")&&sortDesc==null) {
+							return menuRepository.findByCategoryAndActiveFalseOrderByPrice(category);
+						}else if(!active&&orderByField.equals("price")&&!sortDesc) {
+							return menuRepository.findByCategoryAndActiveFalseOrderByPrice(category);
+						}else if(!active&&orderByField.equals("price")&&sortDesc) {
+							return menuRepository.findByCategoryAndActiveFalseOrderByPriceDesc(category);
+						}
+						//active true
+						else if(active&&orderByField.equals("name")&&sortDesc==null) {
+							return menuRepository.findByCategoryAndActiveTrueOrderByName(category);
+						}else if(active&&orderByField.equals("name")&&!sortDesc) {
+							return menuRepository.findByCategoryAndActiveTrueOrderByName(category);
+						}else if(active&&orderByField.equals("name")&&sortDesc) {
+							return menuRepository.findByCategoryAndActiveTrueOrderByNameDesc(category);
+						}else if(active&&orderByField.equals("price")&&sortDesc==null) {
+							return menuRepository.findByCategoryAndActiveTrueOrderByPrice(category);
+						}else if(active&&orderByField.equals("price")&&!sortDesc) {
+							return menuRepository.findByCategoryAndActiveTrueOrderByPrice(category);
+						}else if(active&&orderByField.equals("price")&&sortDesc) {
+							return menuRepository.findByCategoryAndActiveTrueOrderByPriceDesc(category);
+						}
+						//
+						else {
+							return menuRepository.findAll();
+						}
+						} else {
+							if(!active) {
+								return menuRepository.findByCategoryAndActiveFalse(category);
+							} else {
+								return menuRepository.findByCategoryAndActiveTrue(category);
+							}
+						}
+					
+					}
+	
+	@GetMapping(path="/menu/id/{theId}")
+	public Menu retrievePurchase(@PathVariable Integer theId) {
+		Menu thePurchase = menuRepository.findById(theId).get();
+		return thePurchase;
+	}
 	
 	@PostMapping(path = "/menu")
-	public ResponseEntity<Menu> createProduct(@RequestBody Menu theMenu) {
+	public ResponseEntity<Menu> createMenu(@RequestBody Menu theMenu) {
 		Menu savedMenu = menuRepository.save(theMenu);
 		URI location = ServletUriComponentsBuilder
 				 .fromCurrentRequest()
@@ -57,7 +178,7 @@ public class MenuResource {
 	
 	@PutMapping(path="/menu/{theId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateProduct(@PathVariable Integer theId, @RequestBody Menu theMenu) {
+	public void updateMenu(@PathVariable Integer theId, @RequestBody Menu theMenu) {
 		try {
 			Menu savedMenu = menuRepository.findById(theId).get();
 			savedMenu.setName(theMenu.getName());
@@ -73,7 +194,7 @@ public class MenuResource {
 	
 	@DeleteMapping(path="/menu/{theId}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteProduct(@PathVariable Integer theId) {
+	public void deleteMenu(@PathVariable Integer theId) {
 		try {
 		Menu theMenu = menuRepository.findById(theId).get();
 		} catch (MenuNotFoundException e) {
