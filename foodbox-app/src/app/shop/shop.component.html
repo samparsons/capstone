@@ -1,5 +1,21 @@
 <mat-toolbar class="bg-success" id="shop">
-    <span fxFlex fxLayoutAlign="start">Choose Groceries</span>
+    <span fxFlex fxLayoutAlign="flex-start">Choose Groceries</span>
+    <select fxFlex fxLayoutAlign="center" class="form-select m-2"
+      #NPSelect (change)="onNPSelected(NPSelect.value)">
+      <option value="">Apply Sorting</option>
+      <option value="name">Sort By Name</option>
+      <option value="price">Sort By Price</option>
+    </select>
+    <span (click)="sortbyName()" *ngIf="NPSelect.value==='name'"><img src="{{sortByName}}" class="m-1"></span>
+    <span (click)="sortbyPrice()" *ngIf="NPSelect.value==='price'"><img src="{{sortByPrice}}" class="m-1"> </span>
+    <select fxFlex fxLayoutAlign="center" class="form-select m-2"
+      #categorySelect (change)="onCategorySelected(categorySelect.value)">
+      <option value="">Choose a Category</option>
+      <option value="chinese">Chinese</option>
+      <option value="indian">Indian</option>
+      <option value="mexican">Mexican</option>
+    </select>
+    <button fxLayoutAlign="center" class="btn btn-light m-4" (click)="apply()">Apply Filters</button>
     <input type="text" class="searchTerm" placeholder="Search..." aria-label="Search" [(ngModel)]="search">
   </mat-toolbar>
   <div class="content">

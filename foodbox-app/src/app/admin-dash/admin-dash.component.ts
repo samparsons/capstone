@@ -28,7 +28,7 @@ export class AdminDashComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.getGrocery();
+    this.getGroceryActive();
     this.getUser();
     this.apiUser.getUser(this.id)
     .subscribe(res=>{
@@ -36,9 +36,9 @@ export class AdminDashComponent implements OnInit {
     });
   }
 
-  getGrocery(){
+  getGroceryActive(){
     setTimeout(() => {
-      this.apiGrocery.getGrocery()
+      this.apiGrocery.getGroceryActive(true)
     .subscribe(res=>{
       this.groceryList = res;
     });
@@ -62,7 +62,7 @@ export class AdminDashComponent implements OnInit {
           console.log(data);
         },
         (error: any) => console.log(error));
-        this.getGrocery();
+        this.getGroceryActive();
         this.reload();
     }
     if(control==='u'){

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { iif, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
@@ -11,11 +11,39 @@ import { catchError, map } from 'rxjs/operators';
 export class GroceryService {
   host = 'localhost';
   baseurl = 'http://'+ this.host +':8081/menu';
-
+  
   constructor(private http:HttpClient) { }
 
-  getGrocery(){
-    return this.http.get<any>(this.baseurl)
+  getGroceryAll(orderByField?:string,sortDesc?:boolean){
+    let stub = '/all/' + (orderByField===undefined ? '' : '/' + orderByField ) + (sortDesc===undefined ? false : '/' + sortDesc );
+    return this.http.get<any>(this.baseurl+stub)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
+  getGroceryActive(active:boolean,orderByField?:string,sortDesc?:boolean){
+    let stub =  '/np' + 
+                (active===undefined ? true : '/' + active ) +
+                (orderByField===undefined ? '' : '/' + orderByField + '/' + sortDesc );
+    
+    return this.http.get<any>(this.baseurl+stub)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
+  getGroceryCatgegory(active:boolean,category:string,orderByField?:string,sortDesc?:boolean){
+    
+    let stub =  '/cat' + 
+                (active===undefined ? true : '/' + active ) +
+                (category===undefined ? '' : '/' + category ) + 
+                (orderByField===undefined ? '' : '/' + orderByField + '/' + sortDesc);
+    if(stub.indexOf('//')>0){
+      stub = stub.slice(0,stub.indexOf('//'));
+    }
+    
+    return this.http.get<any>(this.baseurl+stub)
     .pipe(map((res:any)=>{
       return res;
     }))
