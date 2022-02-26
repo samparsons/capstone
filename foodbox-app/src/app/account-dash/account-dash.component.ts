@@ -64,6 +64,10 @@ export class AccountDashComponent implements OnInit {
 
   handleLogout(){
     localStorage.removeItem('authUser');
+    localStorage.removeItem('checkout');
+    localStorage.removeItem('localProducts');
+    localStorage.removeItem('localUsers');
+    localStorage.removeItem('localCart');
     this.internal.authSubject.next(false);
     this.internal.authMessage.next('Login');
     this.internal.adminBool.next(false);
