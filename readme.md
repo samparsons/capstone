@@ -74,7 +74,7 @@
 ### run the command to run ubuntu on the docker image so you can start doing commands to check and see how things are working. 
 `> docker run -it <image name> bash` 
 
-###run an image name 
+### run an image name 
 `> docker run <image name>` 
 
 ### show the ip address of the container 
