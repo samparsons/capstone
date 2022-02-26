@@ -6,7 +6,8 @@
         
       </ul>
       <ul class="nav my-1">
-        <li class="nav-item"><a routerLink="admin" class="nav-link link-dark px-2">Admin Login</a></li>
+        <li class="nav-item"><a routerLink="admin-dash" class="nav-link link-dark px-2" *ngIf="adminBool">Admin Portal</a></li>
+        <li class="nav-item"><a routerLink="login" class="nav-link link-dark px-2" (click)="handleAccountClick()" >{{authMessage}}</a></li>
         <li class="nav-item"><a routerLink="checkout" class="nav-link link-dark px-2">Checkout</a></li>
         <li class="nav-item"><a routerLink="cart" class="nav-link link-dark px-2">View Cart</a></li>
         <li>

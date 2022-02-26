@@ -42,8 +42,6 @@ public class TransactionDetailResource {
 		return TransactionTotal;
 	}
 	
-	
-	
 	@GetMapping(path="/transactionDetail/{theId}")
 	public TransactionDetail getTransactionDetailById(@PathVariable Integer theId) {
 		TransactionDetail TransactionDetail = transactionDetailRepository.findById(theId).get(); 
@@ -51,7 +49,7 @@ public class TransactionDetailResource {
 	} 
 	
 	@PostMapping(path = "/transactionDetail")
-	public ResponseEntity<TransactionDetail> createProduct(@RequestBody TransactionDetail theTransactionDetail) {
+	public TransactionDetail createProduct(@RequestBody TransactionDetail theTransactionDetail) {
 		TransactionDetail savedTransactionDetail = transactionDetailRepository.save(theTransactionDetail);
 		
 		URI location = ServletUriComponentsBuilder
@@ -59,7 +57,7 @@ public class TransactionDetailResource {
 				 .path("/{theId}")
 				 .buildAndExpand(savedTransactionDetail.getId())
 				 .toUri();
-		return ResponseEntity.created(location).build();
+		return savedTransactionDetail;
 	}
 	
 	@PutMapping(path="/transactionDetail/{theId}")

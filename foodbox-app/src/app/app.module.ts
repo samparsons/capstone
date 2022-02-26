@@ -11,6 +11,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 //3rd Party
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
@@ -28,6 +29,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentConfirmComponent } from './payment-confirm/payment-confirm.component';
 import { ShopComponent } from './shop/shop.component';
+import { AccountDashComponent } from './account-dash/account-dash.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { ShopComponent } from './shop/shop.component';
     CartComponent,
     CheckoutComponent,
     PaymentConfirmComponent,
-    ShopComponent
+    ShopComponent,
+    AccountDashComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { ShopComponent } from './shop/shop.component';
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

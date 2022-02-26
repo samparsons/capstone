@@ -12,6 +12,10 @@ export class InternalService {
   showSubject = new Subject<any>();
   userSubject = new Subject<any>();
   productSubject = new Subject<any>();
+  authSubject = new Subject<any>();
+  authMessage = new Subject<any>();
+  loginHelpMessage = new Subject<any>();
+  adminBool = new Subject<any>();
 
 
 }

@@ -3,6 +3,7 @@ import { InternalService } from '../service/data/internal.service';
 import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GroceryService } from '../service/data/grocery.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,11 +14,17 @@ export class CheckoutComponent implements OnInit {
   cart:any = [];
   cartDetails:any = [];
   cartValue:any = [];
+  authUser:any = [];
+  user:any = [];
+  names:any = [];
+  address:any=[];
   total:number=0;
   cartNumber:number=0;
   show:boolean=false;
   cartCount:number = 0;
   firstName:string = "";
+  loginHelpMessage:string='';
+  res:any=[];
   checkout: FormGroup = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
@@ -39,13 +46,24 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private internal:InternalService,
     private fb: FormBuilder,
-    private router : Router) {
+    private router : Router,
+    private api: GroceryService) {
     this.internal.cartSubject.subscribe((data)=>{
       this.cartCount = data;
+    });
+    this.internal.loginHelpMessage.subscribe((data)=>{
+      this.loginHelpMessage = data;
     });
    }
 
   ngOnInit(): void {
+    this.authUser = localStorage.getItem('authUser');
+    this.user = JSON.parse(this.authUser);
+    if(this.user===null){
+      this.router.navigate(['login']);
+    }
+    this.names = this.user.name.split(' ');
+    this.address = this.user.address.split(', ');
     this.getCartData();
     this.cartTotal();
     this.cartNumberFunc();
@@ -70,8 +88,6 @@ export class CheckoutComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } {
     return this.checkout.controls;
   }
-  
-
 
   getCartData(): void {
     let cartData = localStorage.getItem('localCart');
@@ -119,16 +135,68 @@ export class CheckoutComponent implements OnInit {
     this.internal.cartSubject.next(this.cartNumber);
   }
 
+  buildLocalTransactions(checkout:any){
+    let currentTime = new Date();
+    let month = currentTime.getMonth() + 1;
+    let day = currentTime.getDate();
+    let year = currentTime.getFullYear();
+    let hour = currentTime.getHours();
+    let min = currentTime.getMinutes();
+
+    let transactionTotal = {
+      "userid" : this.user.id,
+      "totalprice" : this.total,
+      "paymentmethod" : checkout.paymentMethod,
+      "transactiondate": month +'/'+ day + '/' + year,
+      "deliverydate" : month +'/'+ (day+1) + '/' + year,
+      "deliverytime" :  hour + ':' + min
+    };
+    let id:number = 0;
+    this.api.addTransactionTotal(transactionTotal)
+      .subscribe(
+        (data)=>{
+          id = data.id;
+          if(localStorage.getItem('localCart')){
+            let cartTemp = localStorage.getItem('localCart');
+            if(cartTemp === null) {
+              //do nothing
+            } else {
+              this.cartDetails = JSON.parse(cartTemp);
+              for(let cartItem of this.cartDetails){
+    
+                let transactionDetail = {
+                  "transactionid":id,
+                  "userid":this.user.id,
+                  "menuid":cartItem.id,
+                  "quantity":cartItem.qty
+                };
+                
+                this.api.addTransactionDetail(transactionDetail)
+                  .subscribe(
+                    (data)=>{
+                    },
+                    (error: any) => console.log(error));
+                }
+              }
+            }
+        },
+        (error: any) => console.log(error));
+      
+  }
+
+
   onSubmit(checkout:any): void {
     this.submitted = true;
     
     if (this.checkout.invalid) {
       return;
     } else {
+      
       localStorage.setItem('checkout',JSON.stringify(checkout.value));
+      this.buildLocalTransactions(checkout.value)
       this.router.navigate(['/pmtConfirm']);
     }
-    console.log(JSON.stringify(this.checkout.value, null, 2));
+    //console.log(JSON.stringify(this.checkout.value, null, 2));
 
   }
 

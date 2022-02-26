@@ -24,6 +24,7 @@ export class SignupComponent implements OnInit {
     password: new FormControl('')
   });
   submitted = false;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -57,11 +58,12 @@ export class SignupComponent implements OnInit {
       return;
     } else {
       //localStorage.setItem('checkout',JSON.stringify(checkout.value));
-
+      let res:any=[];
       this.saveUser(signup);
-      this.router.navigate(['/admin']);
+       
+      this.router.navigate(['/login']);
     }
-    console.log(JSON.stringify(this.signup.value, null, 2));
+    //console.log(JSON.stringify(this.signup.value, null, 2));
 
   }
 
@@ -79,16 +81,16 @@ export class SignupComponent implements OnInit {
       "address":address,
       "username":input.value.username,
       "password":input.value.password,
-      "adminstatus":input.value.adminstatus
+      "adminstatus":false
     }
 
     this.api.addUser(user)
       .subscribe(
-        (data: User)=>{
-          console.log(data);
+        (data)=>{
+          console.log(data)
         },
         (error: any) => console.log(error));
-    this.router.navigate(['/admin']);
+    //this.router.navigate(['/admin']);
   }
 
 

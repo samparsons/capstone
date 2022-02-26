@@ -1,4 +1,4 @@
-insert into menu(id,name,description,category,imgurl,price,active) values (1,'Sweet \x26 Sour Soup','A description of Sweet \x26 Sour Soup.','chinese','assets/img/chinese/chinese_sweetsoursoup.jpeg',7.99,true);
+insert into menu(id,name,description,category,imgurl,price,active) values (1,'Sweet & Sour Soup','A description of Sweet & Sour Soup.','chinese','assets/img/chinese/chinese_sweetsoursoup.jpeg',7.99,true);
 insert into menu(id,name,description,category,imgurl,price,active) values (2,'Dumplings','A description of Dumplings.','chinese','assets/img/chinese/chinese_dumpling.jpeg',14.99,true);
 insert into menu(id,name,description,category,imgurl,price,active) values (3,'Eggrolls','A description of Eggrolls.','chinese','assets/img/chinese/chinese_eggroll.jpeg',12.99,true);
 insert into menu(id,name,description,category,imgurl,price,active) values (4,'Lo Mein','A description of Lo Mein.','chinese','assets/img/chinese/chinese_lomein.jpeg',10.49,true);
@@ -34,3 +34,15 @@ insert into user(id,name,address,username,password,adminstatus) values (11,'Shar
 insert into user(id,name,address,username,password,adminstatus) values (12,'Aurora Alvarez','123 Calle, Buenos Aries, BS, 20010','suegra','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (13,'Diego Candia','123 Calle, Viedma, RN, 20010','suegro','pw',false);
 insert into user(id,name,address,username,password,adminstatus) values (14,'Jorge Alvarez','123 Calle, Buenos Aries, BS, 20010','tio','pw',false);
+
+insert into transaction_total(id,userid,totalprice,paymentmethod,transactiondate,deliverydate,deliverytime) values (1,1,24.98,'Visa','01-01-2022','01-01-2022','13:00');
+insert into transaction_detail(id,transactionid,userid,menuid,quantity) values (1,1,1,15,2);
+
+insert into transaction_total(id,userid,totalprice,paymentmethod,transactiondate,deliverydate,deliverytime) values (2,1,27.38,'Visa','01-05-2022','01-06-2022','01:24');
+insert into transaction_detail(id,transactionid,userid,menuid,quantity) values (2,2,1,7,1);
+insert into transaction_detail(id,transactionid,userid,menuid,quantity) values (3,2,1,18,1);
+
+insert into transaction_total(id,userid,totalprice,paymentmethod,transactiondate,deliverydate,deliverytime) values (3,2,38.77,'Amex','04-01-2021','04-01-2021','11:52');
+insert into transaction_detail(id,transactionid,userid,menuid,quantity) values (4,3,2,14,1);
+insert into transaction_detail(id,transactionid,userid,menuid,quantity) values (5,3,2,17,1);
+insert into transaction_detail(id,transactionid,userid,menuid,quantity) values (6,3,2,8,1);

@@ -1,6 +1,7 @@
 import { GroceryService } from '../service/data/grocery.service';
 import { Component, OnInit } from '@angular/core';
 import { InternalService } from '../service/data/internal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -32,7 +33,8 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private api:GroceryService,
-    private internal:InternalService
+    private internal:InternalService,
+    private router : Router
   ) { }
   
   
@@ -47,6 +49,10 @@ export class ShopComponent implements OnInit {
     })
     this.sortByName = this.sortNameIconAsc;
     this.sortByPrice = this.sortPriceIconAsc;
+  }
+
+  handleCartClick(){
+    this.router.navigate(['cart']);
   }
 
   onCategorySelected(category:string){
@@ -187,5 +193,7 @@ export class ShopComponent implements OnInit {
     }
     this.internal.cartSubject.next(this.cartNumber);
   }
+
+
 
 }

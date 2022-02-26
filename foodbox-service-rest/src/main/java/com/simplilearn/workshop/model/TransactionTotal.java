@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class TransactionTotal {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer Id;
+	private Integer id;
 	private Integer userid;
 	private Double totalprice;
 	private String paymentmethod;
@@ -85,16 +85,12 @@ public class TransactionTotal {
 	}
 
 	public Integer getId() {
-		return Id;
-	}
-	
-	public void setId(Integer id) {
-		Id = id;
+		return id;
 	}
 
 	@Override
 	public String toString() {
-		return "TransactionTotal [Id=" + Id + ", userid=" + userid + ", totalprice="
+		return "TransactionTotal [Id=" + id + ", userid=" + userid + ", totalprice="
 				+ totalprice + ", transactiondate=" + transactiondate + ", deliverydate=" + deliverydate
 				+ ", deliverytime=" + deliverytime + "]";
 	}

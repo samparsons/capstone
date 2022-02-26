@@ -9,6 +9,7 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaymentConfirmComponent } from './payment-confirm/payment-confirm.component';
 import { ShopComponent } from './shop/shop.component';
+import { AccountDashComponent } from './account-dash/account-dash.component';
 
 const routes: Routes = [
   { path: '',
@@ -29,14 +30,17 @@ const routes: Routes = [
   { path: 'pmtConfirm',
     component: PaymentConfirmComponent
   },
-  { path: 'admin',
+  { path: 'login',
     component: AdminLoginComponent
   },
-  { path: 'admin-dash/:id',
+  { path: 'admin-dash',
     component: AdminDashComponent
   },
   { path: 'signup',
     component: SignupComponent
+  },
+  { path: 'account',
+    component: AccountDashComponent
   },
   { path: '**',
     component: HomeComponent

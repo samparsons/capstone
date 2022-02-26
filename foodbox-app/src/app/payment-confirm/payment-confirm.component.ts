@@ -24,6 +24,8 @@ export class PaymentConfirmComponent implements OnInit {
     this.cartTotal();
     this.showContent();
     this.cartNumberFunc();
+    localStorage.removeItem('localCart');
+    this.internal.cartSubject.next(0);
   }
 
   getCartData(){

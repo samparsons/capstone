@@ -38,7 +38,7 @@ public class UserResource {
 	
 	
 	@GetMapping(path="/user")
-	public List<User> getGroceries() {
+	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
 	
@@ -61,7 +61,7 @@ public class UserResource {
 	} 
 	
 	@PostMapping(path = "/user")
-	public ResponseEntity<User> createProduct(@RequestBody User theUser) {
+	public User createUser(@RequestBody User theUser) {
 		User savedUser = userRepository.save(theUser);
 		savedUser.setAdminstatus(theUser.getAdminstatus());
 		if(savedUser.getAdminstatus()==null) {
@@ -72,12 +72,12 @@ public class UserResource {
 				 .path("/{theId}")
 				 .buildAndExpand(savedUser.getId())
 				 .toUri();
-		return ResponseEntity.created(location).build();
+		return savedUser;
 	}
 	
 	@PutMapping(path="/user/{theId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateProduct(@PathVariable Integer theId, @RequestBody User theUser) {
+	public void updateUser(@PathVariable Integer theId, @RequestBody User theUser) {
 		try {
 			//System.out.println("ID PASSED: " + theId);
 			//System.out.println("USER PASSED: " + theUser);
@@ -99,7 +99,7 @@ public class UserResource {
 	
 	@DeleteMapping(path="/user/{theId}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void deleteProduct(@PathVariable Integer theId) {
+	public void deleteUser(@PathVariable Integer theId) {
 		try {
 		User theUser = userRepository.findById(theId).get();
 		} catch (UserNotFoundException e) {

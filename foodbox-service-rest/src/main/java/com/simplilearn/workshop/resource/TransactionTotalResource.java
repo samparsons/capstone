@@ -36,19 +36,19 @@ public class TransactionTotalResource {
 	}
 	
 	@GetMapping(path="/transactionTotal/user/{theId}")
-	public List<TransactionTotal> getTransactionTotalByUserId(@PathVariable Integer userid) {
-		List<TransactionTotal> TransactionTotal = transactionTotalRepository.findByuserid(userid); 
+	public List<TransactionTotal> getTransactionTotalByUserId(@PathVariable Integer theId) {
+		List<TransactionTotal> TransactionTotal = transactionTotalRepository.findByuserid(theId); 
 		return TransactionTotal;
 	}
 	
 	@GetMapping(path="/transactionTotal/{theId}")
-	public TransactionTotal getTransactionTotalById(@PathVariable Integer theId) {
-		TransactionTotal TransactionTotal = transactionTotalRepository.findById(theId).get(); 
+	public List<TransactionTotal> getTransactionTotalById(@PathVariable Integer theId) {
+		List<TransactionTotal> TransactionTotal = transactionTotalRepository.findByuserid(theId); 
 		return TransactionTotal;
 	}
 	
 	@PostMapping(path = "/transactionTotal")
-	public ResponseEntity<TransactionTotal> createProduct(@RequestBody TransactionTotal theTransactionTotal) {
+	public TransactionTotal createProduct(@RequestBody TransactionTotal theTransactionTotal) {
 		TransactionTotal savedTransactionTotal = transactionTotalRepository.save(theTransactionTotal);
 		System.out.println("the transactionTotal" + theTransactionTotal.toString());
 		
@@ -58,7 +58,7 @@ public class TransactionTotalResource {
 				 .path("/{theId}")
 				 .buildAndExpand(savedTransactionTotal.getId())
 				 .toUri();
-		return ResponseEntity.created(location).build();
+		return savedTransactionTotal;
 	}
 	
 	@PutMapping(path="/transactionTotal/{theId}")

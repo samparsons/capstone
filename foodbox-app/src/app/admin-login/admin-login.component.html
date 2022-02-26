@@ -1,6 +1,6 @@
 <div class="container">
-    <h3>Login to Kitchen Story</h3>
-    <div class="alert alert-warning" *ngIf='invalidLogin'>{{errorMessage}}</div>
+    <h3>Login to FoodBox</h3>
+    <div class="alert alert-warning" *ngIf="errorBool">{{errorMessage}}</div>
     <div class="pt-3">
         User Name   : <input type="text" name="username" [(ngModel)] = "username"> 
         Password    : <input type="password" name="password" [(ngModel)] = "password">

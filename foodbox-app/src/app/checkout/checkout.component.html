@@ -44,8 +44,9 @@
                 type="text" 
                 class="form-control" 
                 id="firstName" 
-                formControlName="firstName" 
+                formControlName="firstName"
                 placeholder="Paul"
+                [(ngModel)]="names[0]"
                 required
                 [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }">
                 
@@ -61,8 +62,9 @@
                 type="text" 
                 class="form-control" 
                 id="lastName" 
-                formControlName="lastName" 
+                formControlName="lastName"
                 placeholder="Atreides"
+                [(ngModel)]="names[1]"
                 required
                 [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }">
                 
@@ -80,6 +82,7 @@
                 id="address" 
                 formControlName="address" 
                 placeholder="1234 Main St"
+                [(ngModel)]="address[0]"
                 required
                 [ngClass]="{ 'is-invalid': submitted && f['address'].errors }">
                 <!-- ERROR MSG -->
@@ -104,6 +107,7 @@
                   id="city" 
                   formControlName="city" 
                   placeholder="City"
+                  [(ngModel)]="address[1]"
                   required
                   [ngClass]="{ 'is-invalid': submitted && f['city'].errors }">
                   <!-- ERROR MSG -->
@@ -118,12 +122,13 @@
               <label for="state">State</label>
               <select class="form-select d-block w-100"
                       formControlName="state"
-                      id="state" 
+                      id="state"
+                      [(ngModel)]="address[2]"
                       required
                       [ngClass]="{ 'is-invalid': submitted && f['state'].errors }">
                 <option value="">Choose...</option>
                 <option>Indiana</option>
-                <option>Washington D.C.</option>
+                <option>DC</option>
               </select>
               <!-- ERROR MSG -->
               <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
@@ -138,6 +143,7 @@
                       class="form-control" 
                       formControlName="zip" 
                       id="zip" 
+                      [(ngModel)]="address[3]"
                       placeholder=""
                       required
                       [ngClass]="{ 'is-invalid': submitted && f['zip'].errors }">

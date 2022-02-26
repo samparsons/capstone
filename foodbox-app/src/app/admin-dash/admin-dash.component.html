@@ -2,9 +2,7 @@
     <div class="row vh-100 overflow-auto">
         <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
             <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-dark">
-                <a href="/" class="d-flex align-items-center pb-sm-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                    <span class="fs-5">Menu</span>
-                </a>
+                <span class="fs-5">FoodBox Admin Portal</span>
                 <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
                         <button class="nav-link px-sm-0 px-2" (click)="toggle('hideall')">
@@ -24,13 +22,13 @@
         </div>
         <div class="col d-flex flex-column h-100">
             <main class="row">
-                <div class="col pt-4" *ngIf="!showUsers&&!showGrocery">
+                <div class="flex-column pt-4" *ngIf="!showUsers&&!showGrocery">
                     <h3>Hello {{user.name}}</h3>
-                    <p class="lead">Click the Products link to see and manager our current inventory. Click the users link to see our list of users.</p>
+                    <p class="lead">Click the Products link to see and manage our current inventory. Click the users link to see our list of users.</p>
                     <hr />
                     <div class="d-flex flex-row">
                         <div style="cursor: pointer;" class="col-3 text-center bg-success m-3 hover" (click)="toggle('g')">
-                            <h4 class="text-white p-3">Total Number of Products</h4>
+                            <h4 class="text-white p-3">Total Number of Menu Items</h4>
                             <hr style="margin:0 auto;width:75%;">
                             <h1 class="text-white p-3">{{groceryList.length}}</h1>
                         </div>
@@ -43,42 +41,42 @@
                     
                 
                 </div>
-                <div class="col pt-4" *ngIf="showUsers">
+                <div class="flex-column pt-4" *ngIf="showUsers">
                     <h3>Users</h3>
                     <table data-toggle="table" class="table table-hover">
                         <thead>
-                            <th scope="col">User Id</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Username</th>
-                            <th scope="col" class="text-center">Password</th>
-                            <th scope="col">Admin Status</th>
-                            <th scope="col"></th>
+                            <th scope="col" style="width: 12.28%">User Id</th>
+                            <th scope="col" style="width: 12.28%">Name</th>
+                            <th scope="col" style="width: 12.28%">Address</th>
+                            <th scope="col" style="width: 12.28%">Username</th>
+                            <th scope="col" style="width: 12.28%" class="text-center">Password</th>
+                            <th scope="col" style="width: 12.28%">Admin Status</th>
+                            <th scope="col" style="width: 12.28%"></th>
                         </thead>
                         <tbody>
                             <tr class="align-middle" *ngFor="let user of userList">
-                                <td class="col-md-2">{{user.id}}</td>
-                                <td class="col-md-2">{{user.name}}</td>
-                                <td class="col-md-4">{{user.address}}</td>
-                                <td class="col-md-1">{{user.username}}</td>
-                                <td class="col-md-1"><input type=password disabled style="border:none;background-color: white;" value="{{user.password}}"></td>
-                                <td class="col-md-1">{{user.adminstatus}}</td>
-                                <td class="col-md-1"><a class="btn btn-danger" (click)="singleDelete(user.id,'u')">delete</a></td>
+                                <td style="width: 12.28%">{{user.id}}</td>
+                                <td style="width: 12.28%">{{user.name}}</td>
+                                <td style="width: 12.28%">{{user.address}}</td>
+                                <td style="width: 12.28%">{{user.username}}</td>
+                                <td style="width: 12.28%"><input type=password disabled style="border:none;background-color: white;" value="{{user.password}}"></td>
+                                <td style="width: 12.28%">{{user.adminstatus}}</td>
+                                <td style="width: 12.28%"><a class="btn btn-danger" (click)="singleDelete(user.id,'u')">delete</a></td>
                             </tr>
                         </tbody>
                     </table>
-                
                 </div>
-                <div class="col pt-4" *ngIf="showGrocery">
+                <div class="flex-column pt-4" *ngIf="showGrocery">
                     <h3>Products</h3>
-                    <table data-toggle="table" class="table table-striped table-hover">
+                    <a class="btn btn-success" (click)="open2(mymodal2)">Add New Product</a>
+                    <table data-toggle="table" class="table table-hover">
                         <thead>
                             <th scope="col">Product Image</th>
                             <th scope="col">Item Name</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">Description</th>                            
+                            <th scope="col">Category</th>
+                            <th scope="col">Active</th>
                             <th scope="col">Price</th>
-                            <th scope="col" class="text-center">Quantity</th>
-                            <th scope="col">Subtotal</th>
                             <th scope="col"></th>
                         </thead>
                         <tbody>
@@ -87,17 +85,175 @@
                                     <img class="card-img-top" src="{{grocery.imgurl}}"></td>
                                 <td class="col-md-2">{{grocery.name}}</td>
                                 <td class="col-md-3">{{grocery.description}}</td>
+                                <td class="col-md-2">{{grocery.category}}</td>
+                                <td class="col-md-1">{{grocery.active}}</td>
                                 <td class="col-md-1">${{grocery.price}}</td>
-                                <td></td>
-                                <td></td>
+                                
+                                <td class="col-md-1"><a class="btn btn-primary" (click)="open(mymodal,grocery.id)">edit</a></td>
                                 <td class="col-md-1"><a class="btn btn-danger" (click)="singleDelete(grocery.id,'g')">delete</a></td>
                             </tr>
                         </tbody>
                     </table>
-                
                 </div>
 
             </main>
         </div>
     </div>
 </div>
+
+<!-- MODAL 1 EDIT PRODUCT-->
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Products</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Edit the product. id: {{editId}}
+      <form [formGroup]="groceryEdit"  (ngSubmit)="onSubmitEdit(groceryEdit)">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">Product Name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                formControlName="name"
+                [(ngModel)]="editName">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="description">Product Description</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="description" 
+                  formControlName="description"
+                  [(ngModel)]="editDescription">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="state">Product Category</label>
+                <select class="form-select d-block w-100"
+                        formControlName="category"
+                        id="category"
+                        [(ngModel)]="editCategoy">
+                  <option>chinese</option>
+                  <option>indian</option>
+                  <option>mexican</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="active">Active Status</label>
+                <select class="form-select d-block w-100"
+                        formControlName="active"
+                        id="active"
+                        [(ngModel)]="editActive">
+                  <option>true</option>
+                  <option>false</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="price">Product Price</label>
+                <input 
+                    type="price" 
+                    class="form-control" 
+                    id="price" 
+                    formControlName="price"
+                    [(ngModel)]="editPrice">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="imgurl">Image Url</label>
+                <input 
+                    type="imgurl" 
+                    class="form-control" 
+                    id="imgurl" 
+                    formControlName="imgurl"
+                    [(ngModel)]="editImgurl">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" >Save Edits</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+  </ng-template>
+
+<!-- MODAL 2 ADD PRODUCT-->
+
+  <ng-template #mymodal2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Products</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Edit the product. id: {{editId}}
+      <form [formGroup]="groceryEdit"  (ngSubmit)="onSubmitAdd(groceryEdit)">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="name">Product Name</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                formControlName="name">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="description">Product Description</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="description" 
+                  formControlName="description">
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="state">Product Category</label>
+                <select class="form-select d-block w-100"
+                        formControlName="category"
+                        id="category">
+                  <option>chinese</option>
+                  <option>indian</option>
+                  <option>mexican</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="active">Active Status</label>
+                <select class="form-select d-block w-100"
+                        formControlName="active"
+                        id="active">
+                  <option>true</option>
+                  <option>false</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="active">Product Price</label>
+                <input 
+                    type="price" 
+                    class="form-control" 
+                    id="price" 
+                    formControlName="price">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="imgurl">Image Url</label>
+                <input 
+                    type="imgurl" 
+                    class="form-control" 
+                    id="imgurl" 
+                    formControlName="imgurl">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" >Save Edits</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+  </ng-template>

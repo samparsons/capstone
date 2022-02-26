@@ -1,0 +1,87 @@
+<div class="container-fluid overflow-hidden">
+    <div class="row vh-100 overflow-auto">
+        <div class="col-12 col-sm-3 col-xl-2 px-sm-2 px-0 bg-light d-flex sticky-top">
+            <div class="d-flex flex-sm-column flex-row flex-grow-1 align-items-center align-items-sm-start px-3 pt-2 text-dark">
+                <span class="fs-5">Your FoodBox Account</span>
+                <ul class="nav nav-pills flex-sm-column flex-row flex-nowrap flex-shrink-1 flex-sm-grow-0 flex-grow-1 mb-sm-auto mb-0 justify-content-center align-items-center align-items-sm-start" id="menu">
+                    <li class="nav-item">
+                        <button class="nav-link px-sm-0 px-2" (click)="toggle('hideall')">
+                            <i class="fs-5 bi-house"></i><span class="ms-1 d-none d-sm-inline" >Dashboard</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="nav-link px-sm-0 px-2" (click)="toggle('t')">
+                            <i class="fs-5 bi-grid"></i><span class="ms-1 d-none d-sm-inline">Purchase History</span></button>
+                    </li>
+                    <li>
+                        <button class="nav-link px-sm-0 px-2" (click)="toggle('a')">
+                            <i class="fs-5 bi-people"></i><span class="ms-1 d-none d-sm-inline">Manage Account</span> </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col d-flex flex-column h-100">
+            <main class="row">
+                <div class="flex-column pt-4" *ngIf="!showTransactions&&!showAccount">
+                    <h3>Hello {{user.name}}</h3>
+                    <p class="lead">Welcome back to FoodBox! Manage your account here.</p> 
+                    <hr />
+                    <button class="btn btn-primary btn-lg btn-block m-3" (click)="handleProceedToCheckout()" *ngIf="cartCount>0">Complete Checkout</button> <button class="btn btn-danger btn-lg btn-block" (click)="handleLogout()">Logout</button>
+                
+                </div>
+                <div class="flex-column pt-4" *ngIf="showTransactions">
+                    <h3>Transactions</h3>
+                    <table data-toggle="table" class="table table-hover">
+                        <thead>
+                            <th scope="col" style="width: 12.28%">Transaction Id</th>
+                            <th scope="col" style="width: 12.28%">Total Price</th>
+                            <th scope="col" style="width: 12.28%">Payment Method</th>
+                            <th scope="col" style="width: 12.28%">Transaction Date</th>
+                            <th scope="col" style="width: 12.28%" >Delivery Date</th>
+                            <th scope="col" style="width: 12.28%">Delivery Time</th>
+                        </thead>
+                        <tbody>
+                            <tr class="align-middle" *ngFor="let transaction of transactionList">
+                                <td style="width: 12.28%">{{transaction.id}}</td>
+                                <td style="width: 12.28%">{{transaction.totalprice}}</td>
+                                <td style="width: 12.28%">{{transaction.paymentmethod}}</td>
+                                <td style="width: 12.28%">{{transaction.transactiondate}}</td>
+                                <td style="width: 12.28%">{{transaction.deliverydate}}</td>
+                                <td style="width: 12.28%">{{transaction.deliverytime}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="flex-column pt-4" *ngIf="showAccount">
+                    <h3>Your Account</h3>
+                    <div class="flex-column pt-4" *ngIf="showAccount">
+                        <h3>Hello {{user.name}}</h3>
+                        <p class="lead">Account updates are coming soon. If you need to update your data, please submit this <a href="#">form</a> to our customer service team.</p><br><br>
+                     
+                        <table data-toggle="table" class="table table-hover">
+                            <thead>
+                                <th scope="col" style="width: 12.28%">User Id</th>
+                                <th scope="col" style="width: 12.28%">Name</th>
+                                <th scope="col" style="width: 12.28%">Address</th>
+                                <th scope="col" style="width: 12.28%">Username</th>
+                                <th scope="col" style="width: 12.28%">Password</th>
+                            </thead>
+                            <tbody>
+                                <tr class="align-middle">
+                                    <td style="width: 12.28%">{{user.id}}</td>
+                                    <td style="width: 12.28%">{{user.name}}</td>
+                                    <td style="width: 12.28%">{{user.address}}</td>
+                                    <td style="width: 12.28%">{{user.username}}</td>
+                                    <td style="width: 12.28%"><input type=password disabled style="border:none;background-color: white;" value="{{user.password}}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+</div>

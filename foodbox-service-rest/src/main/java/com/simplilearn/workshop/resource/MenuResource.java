@@ -183,6 +183,8 @@ public class MenuResource {
 			Menu savedMenu = menuRepository.findById(theId).get();
 			savedMenu.setName(theMenu.getName());
 			savedMenu.setDescription(theMenu.getDescription());
+			savedMenu.setCategory(theMenu.getCategory());
+			savedMenu.setActive(theMenu.getActive());
 			savedMenu.setPrice(theMenu.getPrice());
 			menuRepository.save(savedMenu);
 		} catch (MenuNotFoundException e) {

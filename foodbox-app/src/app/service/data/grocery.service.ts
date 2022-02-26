@@ -48,6 +48,73 @@ export class GroceryService {
       return res;
     }))
   }
+
+  getSingleGrocery(id:number){
+    let stub = '/id/' + id;
+    return this.http.get<any>(this.baseurl+stub)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
+  addSingleGrocery(grocery:any): Observable<any> {
+    return this.http.post<any>(this.baseurl, grocery, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.handleError));
+  }
+
+  updateGrocery(grocery:any,id:number): Observable<void> {
+    let baseurl = 'http://'+ this.host +':8081';
+    let stub =  '/menu/' + id;
+    if(stub.indexOf('//')>0){
+      stub = stub.slice(0,stub.indexOf('//'));
+    }
+    return this.http.put<void>(baseurl+stub, grocery, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.handleError));
+  }
+
+  getTransactionTotalsByUser(userId:number){
+    let baseurl = 'http://'+ this.host +':8081';
+    let stub =  '/transactionTotal/user/' + userId;
+    if(stub.indexOf('//')>0){
+      stub = stub.slice(0,stub.indexOf('//'));
+    }
+    return this.http.get<any>(baseurl+stub)
+    .pipe(map((res:any)=>{
+      return res;
+    }))
+  }
+
+  addTransactionTotal(transactionTotal:any): Observable<any> {
+    let baseurl = 'http://'+ this.host +':8081';
+    let stub =  '/transactionTotal';
+    return this.http.post<any>(baseurl+stub, transactionTotal, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.handleError));
+  }
+  
+  addTransactionDetail(transactionDetail:any): Observable<any> {
+    let baseurl = 'http://'+ this.host +':8081';
+    let stub =  '/transactionDetail';
+    return this.http.post<any>(baseurl+stub, transactionDetail, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+    .pipe(catchError(this.handleError));
+  }
+
+
   
   deleteGrocery(id:number): Observable<void> {
     return this.http.delete<void>(`${this.baseurl}/${id}`, {
