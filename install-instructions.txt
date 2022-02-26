@@ -49,6 +49,7 @@
 # for backend pipeline, use git repo: https://github.com/samparsons/pg6-backend.git
 
 # UPDATE AngularJS with correct IP address from ec2 box.
+# UPDATE rest service with correct connection string (if localhost was last used).
 
 # create pipeline
 # Go to Build Triggers > Poll SCM, enter '* * * * *'
