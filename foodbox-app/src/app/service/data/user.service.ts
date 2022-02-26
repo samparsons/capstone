@@ -21,7 +21,7 @@ export class User {
 })
 
 export class UserService {
-  host = 'localhost';
+  host = '54.221.149.231';
   baseurl = 'http://'+ this.host +':8081/user';
 
   constructor(private http:HttpClient) { }

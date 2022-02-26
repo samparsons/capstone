@@ -9,7 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 
 //I SHOULD RENAME THIS FROM GROCERY SERVICE TO MENU SERVICE, BUT I AM TOO LAZY. IF I HAVE TIME I WILL.
 export class GroceryService {
-  host = 'localhost';
+  host = '54.221.149.231';
   baseurl = 'http://'+ this.host +':8081/menu';
   
   constructor(private http:HttpClient) { }
